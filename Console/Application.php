@@ -79,7 +79,6 @@ class Application extends BaseApplication
         }
 
         // 2z -> forced LOB :-)
-        
         /*
         $this->getConnection()->executeUpdate("UPDATE jms_jobs SET stackTrace = :trace, memoryUsage = :memoryUsage, memoryUsageReal = :memoryUsageReal WHERE id = :id", array(
             'id' => $jobId,
