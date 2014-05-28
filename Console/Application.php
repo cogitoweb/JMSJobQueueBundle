@@ -78,12 +78,23 @@ class Application extends BaseApplication
             return;
         }
 
+        // 2z -> forced LOB :-)
+        
+        /*
         $this->getConnection()->executeUpdate("UPDATE jms_jobs SET stackTrace = :trace, memoryUsage = :memoryUsage, memoryUsageReal = :memoryUsageReal WHERE id = :id", array(
             'id' => $jobId,
             'memoryUsage' => memory_get_peak_usage(),
             'memoryUsageReal' => memory_get_peak_usage(true),
             'trace' => serialize($ex ? FlattenException::create($ex) : null),
         ));
+         */
+        
+        $stmt = $this->getConnection()->prepare("UPDATE jms_jobs SET stackTrace = :trace, memoryUsage = :memoryUsage, memoryUsageReal = :memoryUsageReal WHERE id = :id");
+        $stmt->bindValue('trace',  serialize(($ex ? FlattenException::create($ex) : null)), \PDO::PARAM_LOB);
+        $stmt->bindValue('memoryUsageReal',  memory_get_peak_usage(true), 'integer');
+        $stmt->bindValue('memoryUsage',  memory_get_peak_usage(), 'integer');
+        $stmt->bindValue('id',  $jobId, 'integer');
+        $stmt->execute();
     }
 
     private function getConnection()
