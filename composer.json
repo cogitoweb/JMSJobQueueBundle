@@ -31,7 +31,7 @@
         "doctrine/orm": "*",
         "symfony/form": "*",
         "symfony/validator": "*",
-        "pagerfanta/pagerfanta": "dev-master"
+        "pagerfanta/pagerfanta": "1.0.1"
     },
     "suggest": {
         "pagerfanta/pagerfanta": "Required when using the webinterface.",
@@ -42,10 +42,5 @@
     "autoload": {
         "psr-0": { "JMS\\JobQueueBundle": "" }
     },
-    "target-dir": "JMS/JobQueueBundle",
-    "extra": {
-        "branch-alias": {
-            "dev-master": "0.1.x-dev"
-        }
-    }
+    "target-dir": "JMS/JobQueueBundle"
 }
